@@ -9,7 +9,7 @@ module.exports = {
     "func-call-spacing": [2, "never"],
     "no-unneeded-ternary": 2,
     semi: [2, "never"],
-    quotes: [2, "single"],
+    quotes: [2, "double"],
     "no-var": 2,
     indent: [2, 2],
     "space-in-parens": [2, "never"],
