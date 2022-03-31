@@ -18,6 +18,9 @@ module.exports = {
     "computed-property-spacing": 2,
     "key-spacing": 2,
     "keyword-spacing": 2,
-    "no-multi-spaces": 2
+    "no-multi-spaces": 2,
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/max-attributes-per-line": "off",
+    "vue/html-self-closing": "off"
   }
 }

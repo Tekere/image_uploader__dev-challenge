@@ -60,4 +60,13 @@ html {
   color: #828282;
 }
 
+.el_btn {
+  display: block;
+  background: #2f80ed;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  letter-spacing: -0.035em;
+  font-size: 0.75rem;
+}
 </style>

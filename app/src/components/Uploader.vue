@@ -1,0 +1,89 @@
+<template>
+  <form action="">
+    <div class="bl_uploader bl_cont">
+      <h2 class="bl_cont_ttl bl_uploader_ttl">Upload your image</h2>
+      <p class="bl_cont_memo bl_uploader_topMemo">File should be Jpeg, Png,...</p>
+      <div class="bl_uploader_uploadArea">
+        <img src="@/assets/upload-area.svg" alt="" class="bl_uploader_uploadArea_img" />
+        <p class="bl_uploader_uploadArea_memo">Drag & Drop your image here</p>
+        <input type="file" name="upload_file" id="input_file" class="bl_uploader_uploadArea_input" />
+      </div>
+      <p class="bl_uploader_or">Or</p>
+      <button @click.prevent="selectImgFile" class="el_btn bl_uploader_uploadBtn">Choose a file</button>
+    </div>
+  </form>
+</template>
+
+<script>
+export default {
+  name: "Uploader",
+  data() {
+    return {
+      inputFile: null //input[type='file']のDOM
+    }
+  },
+  methods: {
+    // 「Choose a file」クリック時にファイル選択を起動
+    selectImgFile() {
+      this.inputFile.click()
+    }
+  },
+  mounted() {
+    /* input[type='file']のDOMを取得して、dataに入れておく。
+    ボタンクリックで発火させる用*/
+    let inputFile = document.getElementById("input_file")
+    this.inputFile = inputFile
+  }
+}
+</script>
+
+<style lang="scss">
+.bl_uploader {
+  background-color: #fff;
+  padding: 36px 26px;
+}
+.bl_uploader_ttl {
+  text-align: center;
+}
+.bl_uploader_topMemo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.bl_uploader_uploadArea {
+  width: 100%;
+  background: #f6f8fb;
+  padding-top: 2rem;
+  padding-bottom: 2.3rem;
+  box-shadow: 0px 4px 12px 0px #0000001a;
+  border-radius: 12px;
+  border: 1px dashed #97bef4;
+  text-align: center;
+  position: relative;
+}
+.bl_uploader_uploadArea_img {
+  width: 33.2%;
+  margin-bottom: 2.3rem;
+}
+.bl_uploader_uploadArea_memo {
+  color: #bdbdbd;
+  font-size: 0.75rem;
+}
+.bl_uploader_or {
+  color: #bdbdbd;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.bl_uploader_uploadBtn {
+  margin-left: auto;
+  margin-right: auto;
+}
+.bl_uploader_uploadArea_input {
+  position: absolute;
+  widows: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+</style>
