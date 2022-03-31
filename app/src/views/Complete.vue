@@ -1,12 +1,9 @@
 <template>
-  <div class="complete">
-    
-  </div>
+  <div class="complete" />
 </template>
 
 <script>
-
 export default {
-  name: "Complete",
-};
+  name: "Complete"
+}
 </script>

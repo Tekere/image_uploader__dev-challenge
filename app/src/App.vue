@@ -8,7 +8,7 @@
 </template>
 
 <style lang="scss">
-@import './css/reset.css';
+@import "./css/reset.css";
 html {
   font-size: 16px;
   font-family: "Poppins";
@@ -50,12 +50,12 @@ html {
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
-.bl_cont_ttl{
+.bl_cont_ttl {
   font-size: 1.125rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
-.bl_cont_memo{
+.bl_cont_memo {
   font-size: 10px;
   color: #828282;
 }
