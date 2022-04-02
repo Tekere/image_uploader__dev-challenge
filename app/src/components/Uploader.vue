@@ -6,7 +6,7 @@
       <div class="bl_uploader_uploadArea">
         <img src="@/assets/upload-area.svg" alt="" class="bl_uploader_uploadArea_img" />
         <p class="bl_uploader_uploadArea_memo">Drag & Drop your image here</p>
-        <input type="file" name="upload_file" id="input_file" class="bl_uploader_uploadArea_input" />
+        <input @change="upload" type="file" name="upload_file" id="input_file" class="bl_uploader_uploadArea_input" />
       </div>
       <p class="bl_uploader_or">Or</p>
       <button @click.prevent="selectImgFile" class="el_btn bl_uploader_uploadBtn">Choose a file</button>
@@ -23,9 +23,34 @@ export default {
     }
   },
   methods: {
-    // 「Choose a file」クリック時にファイル選択を起動
+    // ファイル選択を起動させる処理
     selectImgFile() {
       this.inputFile.click()
+    },
+    // 画像アップロード処理
+    upload(e) {
+      let file = e.target.files[0]
+      // バリデーションを通ればUploadする
+      // バリデーションに引っかかればinputを初期化する
+      if (this.validate_uploadFile(file)) {
+        // axiosのPOST処理
+      } else {
+        this.inputFile.value = ""
+      }
+    },
+    // 選択されたファイルが画像ファイルかどうかと3MB以内であるかか検査するメソッド
+    validate_uploadFile(target) {
+      // fileType
+      if (target.type != "image/jpeg" && target.type != "image/gif" && target.type != "image/png") {
+        alert(".jpg .png .gifのいずれかのファイルのみ許可されています")
+        return false
+      }
+      // size
+      if (target.size > 3000000) {
+        alert("ファイルの上限サイズ3MBを超えています")
+        return false
+      }
+      return true
     }
   },
   mounted() {
