@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "Uploader",
   data() {
@@ -36,11 +37,24 @@ export default {
     },
     // 画像アップロード処理
     upload(e) {
+      // 1.選択されたファイルだけを取得する。
       let file = e.target.files[0]
-      // バリデーションを通ればUploadする
-      // バリデーションに引っかかればinputを初期化する
+
+      /* 2. バリデーションを通ればUploadする
+            バリデーションに引っかかればinputを初期化する 
+      */
       if (this.validate_uploadFile(file)) {
         // axiosのPOST処理
+
+        // まず、FormDataクラスを作って、選択されたファイルをセットする。
+        let params = new FormData()
+        params.append("file", file)
+        // ファイルをPOSTする用のヘッダーを定義
+        const headers = { "content-type": "multipart/form-data" }
+        // POST実行
+        axios.post("/api/upload.php", params, { headers }).then((response) => {
+          console.log(response.data)
+        })
       } else {
         this.$refs.input_file.value = ""
       }
