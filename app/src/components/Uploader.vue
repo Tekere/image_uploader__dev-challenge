@@ -1,31 +1,38 @@
 <template>
-  <form action="">
+  <div>
     <div class="bl_uploader bl_cont">
       <h2 class="bl_cont_ttl bl_uploader_ttl">Upload your image</h2>
       <p class="bl_cont_memo bl_uploader_topMemo">File should be Jpeg, Png,...</p>
       <div class="bl_uploader_uploadArea">
         <img src="@/assets/upload-area.svg" alt="" class="bl_uploader_uploadArea_img" />
         <p class="bl_uploader_uploadArea_memo">Drag & Drop your image here</p>
-        <input @change="upload" type="file" name="upload_file" id="input_file" class="bl_uploader_uploadArea_input" />
+        <input
+          @change="upload"
+          type="file"
+          name="upload_file"
+          id="input_file"
+          class="bl_uploader_uploadArea_input"
+          ref="input_file"
+        />
+        <input type="hidden" name="test" value="test" />
       </div>
       <p class="bl_uploader_or">Or</p>
       <button @click.prevent="selectImgFile" class="el_btn bl_uploader_uploadBtn">Choose a file</button>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Uploader",
   data() {
-    return {
-      inputFile: null //input[type='file']のDOM
-    }
+    return {}
   },
   methods: {
     // ファイル選択を起動させる処理
     selectImgFile() {
-      this.inputFile.click()
+      // input[type='file']のDOMをクリックさせる
+      this.$refs.input_file.click()
     },
     // 画像アップロード処理
     upload(e) {
@@ -35,10 +42,10 @@ export default {
       if (this.validate_uploadFile(file)) {
         // axiosのPOST処理
       } else {
-        this.inputFile.value = ""
+        this.$refs.input_file.value = ""
       }
     },
-    // 選択されたファイルが画像ファイルかどうかと3MB以内であるかか検査するメソッド
+    // 選択されたファイルが画像ファイルかどうかと2MB以内であるかか検査するメソッド
     validate_uploadFile(target) {
       // fileType
       if (target.type != "image/jpeg" && target.type != "image/gif" && target.type != "image/png") {
@@ -46,18 +53,12 @@ export default {
         return false
       }
       // size
-      if (target.size > 3000000) {
-        alert("ファイルの上限サイズ3MBを超えています")
+      if (target.size > 2000000) {
+        alert("ファイルの上限サイズ2MBを超えています")
         return false
       }
       return true
     }
-  },
-  mounted() {
-    /* input[type='file']のDOMを取得して、dataに入れておく。
-    ボタンクリックで発火させる用*/
-    let inputFile = document.getElementById("input_file")
-    this.inputFile = inputFile
   }
 }
 </script>
