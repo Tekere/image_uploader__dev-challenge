@@ -52,9 +52,14 @@ export default {
         // ファイルをPOSTする用のヘッダーを定義
         const headers = { "content-type": "multipart/form-data" }
         // POST実行
-        axios.post("/api/upload.php", params, { headers }).then((response) => {
-          console.log(response.data)
-        })
+        axios
+          .post("/api/upload.php", params, { headers })
+          .then((response) => {
+            console.log(response.data)
+          })
+          .catch((err) => {
+            console.log("error:", err)
+          })
       } else {
         this.$refs.input_file.value = ""
       }
