@@ -24,7 +24,12 @@ try {
     if ($result_flag) {
       header("HTTP/1.1 200 OK");
       header("Content-Type: application/json; charset=utf-8");
-      $result = array('code' => 200, 'message' => 'success');
+      $result = array(
+        'code' => 200,
+        'message' => 'success',
+        'image_url' => realpath($upload_path)  //絶対パスに変換して返す
+      );
+      echo $upload_path;
       echo json_encode($result, JSON_UNESCAPED_UNICODE);
     } else {
       throw new Exception('アップロードに失敗しました');
