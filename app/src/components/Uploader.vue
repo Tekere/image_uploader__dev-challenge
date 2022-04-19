@@ -44,8 +44,10 @@ export default {
             バリデーションに引っかかればinputを初期化する 
       */
       if (this.validate_uploadFile(file)) {
-        // axiosのPOST処理
+        //まず、emitで親のisUploadingをtrueにする
+        this.$emit("start-uploading")
 
+        // 以下axiosのPOST処理
         // まず、FormDataクラスを作って、選択されたファイルをセットする。
         let params = new FormData()
         params.append("file", file)
@@ -56,9 +58,11 @@ export default {
           .post("/api/upload.php", params, { headers })
           .then((response) => {
             console.log(response.data)
+            this.$emit("stop-uploading")
           })
           .catch((err) => {
             console.log("error:", err)
+            this.$emit("stop-uploading")
           })
       } else {
         this.$refs.input_file.value = ""
