@@ -58,11 +58,15 @@ export default {
           .post("/api/upload.php", params, { headers })
           .then((response) => {
             console.log(response.data)
-            this.$emit("stop-uploading")
+            setTimeout(() => {
+              this.$emit("stop-uploading")
+            }, 2000)
           })
           .catch((err) => {
             console.log("error:", err)
-            this.$emit("stop-uploading")
+            setTimeout(() => {
+              this.$emit("stop-uploading")
+            }, 2000)
           })
       } else {
         this.$refs.input_file.value = ""
@@ -87,10 +91,6 @@ export default {
 </script>
 
 <style lang="scss">
-.bl_uploader {
-  background-color: #fff;
-  padding: 36px 26px;
-}
 .bl_uploader_ttl {
   text-align: center;
 }

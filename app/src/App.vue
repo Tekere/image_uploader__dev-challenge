@@ -46,7 +46,8 @@ html {
   max-width: 400px;
   max-height: 470px;
   width: 400px;
-
+  background-color: #fff;
+  padding: 36px 26px;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
