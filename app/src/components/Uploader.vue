@@ -57,7 +57,8 @@ export default {
         axios
           .post("/api/upload.php", params, { headers })
           .then((response) => {
-            console.log(response.data)
+            // 親のHome.vueに返ってきた画像パスを渡す
+            this.$emit("get-uploaded-image-path", response.data)
             setTimeout(() => {
               this.$emit("stop-uploading")
             }, 2000)
