@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <div class="bl_uploader bl_cont">
-      <h2 class="bl_cont_ttl bl_uploader_ttl">Upload your image</h2>
-      <p class="bl_cont_memo bl_uploader_topMemo">File should be Jpeg, Png,...</p>
-      <div class="bl_uploader_uploadArea">
-        <img src="@/assets/upload-area.svg" alt="" class="bl_uploader_uploadArea_img" />
-        <p class="bl_uploader_uploadArea_memo">Drag & Drop your image here</p>
-        <input
-          @change="upload"
-          type="file"
-          name="upload_file"
-          id="input_file"
-          class="bl_uploader_uploadArea_input"
-          ref="input_file"
-        />
-        <input type="hidden" name="test" value="test" />
-      </div>
-      <p class="bl_uploader_or">Or</p>
-      <button @click.prevent="selectImgFile" class="el_btn bl_uploader_uploadBtn">Choose a file</button>
+  <div class="bl_uploader bl_cont">
+    <h2 class="bl_cont_ttl bl_uploader_ttl">Upload your image</h2>
+    <p class="bl_cont_memo bl_uploader_topMemo">File should be Jpeg, Png,...</p>
+    <div class="bl_uploader_uploadArea">
+      <img src="@/assets/upload-area.svg" alt="" class="bl_uploader_uploadArea_img" />
+      <p class="bl_uploader_uploadArea_memo">Drag & Drop your image here</p>
+      <input
+        @change="upload"
+        type="file"
+        name="upload_file"
+        id="input_file"
+        class="bl_uploader_uploadArea_input"
+        ref="input_file"
+      />
+      <input type="hidden" name="test" value="test" />
     </div>
+    <p class="bl_uploader_or">Or</p>
+    <button @click.prevent="selectImgFile" class="el_btn bl_uploader_uploadBtn">Choose a file</button>
   </div>
 </template>
 

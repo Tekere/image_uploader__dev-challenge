@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <div class="bl_loading bl_cont">
-      <h2 class="bl_cont_ttl">Uploading...</h2>
-      <div class="bl_loading_loadingBar">
-        <div class="bl_loading_loadingBarIcon"></div>
-      </div>
+  <div class="bl_loading bl_cont">
+    <h2 class="bl_cont_ttl">Uploading...</h2>
+    <div class="bl_loading_loadingBar">
+      <div class="bl_loading_loadingBarIcon"></div>
     </div>
   </div>
 </template>
