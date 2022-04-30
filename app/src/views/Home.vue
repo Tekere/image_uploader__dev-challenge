@@ -3,12 +3,12 @@
     <Loading v-if="isUploading"></Loading>
     <div v-else>
       <Uploader
-        v-if="!uploadedImagePath"
+        v-if="!uploadedImageName"
         @start-uploading="startIsUploading"
         @stop-uploading="stopIsUploading"
-        @get-uploaded-image-path="getUploadedImagePath"
+        @get-uploaded-image-path="getUploadedImageName"
       />
-      <complete v-else-if="uploadedImagePath"></complete>
+      <complete v-else-if="uploadedImageName" :uploaded-image-name="uploadedImageName"></complete>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       isUploading: false,
-      uploadedImagePath: "yeah"
+      uploadedImageName: ""
     }
   },
   methods: {
@@ -41,8 +41,9 @@ export default {
       this.isUploading = false
     },
     // アップロード成功した画像のパスを$emitで受け取る
-    getUploadedImagePath(ppp) {
-      this.uploadedImagePath = ppp
+    getUploadedImageName(name) {
+      // dataにセットする
+      this.uploadedImageName = name
     }
   }
 }
