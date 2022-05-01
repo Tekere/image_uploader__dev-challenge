@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <div class="bl_uploader bl_cont">
-      <h2 class="bl_cont_ttl bl_uploader_ttl">Upload your image</h2>
-      <p class="bl_cont_memo bl_uploader_topMemo">File should be Jpeg, Png,...</p>
-      <div class="bl_uploader_uploadArea">
-        <img src="@/assets/upload-area.svg" alt="" class="bl_uploader_uploadArea_img" />
-        <p class="bl_uploader_uploadArea_memo">Drag & Drop your image here</p>
-        <input
-          @change="upload"
-          type="file"
-          name="upload_file"
-          id="input_file"
-          class="bl_uploader_uploadArea_input"
-          ref="input_file"
-        />
-        <input type="hidden" name="test" value="test" />
-      </div>
-      <p class="bl_uploader_or">Or</p>
-      <button @click.prevent="selectImgFile" class="el_btn bl_uploader_uploadBtn">Choose a file</button>
+  <div class="bl_uploader bl_cont">
+    <h2 class="bl_cont_ttl bl_uploader_ttl">Upload your image</h2>
+    <p class="bl_cont_memo bl_uploader_topMemo">File should be Jpeg, Png,...</p>
+    <div class="bl_uploader_uploadArea">
+      <img src="@/assets/upload-area.svg" alt="" class="bl_uploader_uploadArea_img" />
+      <p class="bl_uploader_uploadArea_memo">Drag & Drop your image here</p>
+      <input
+        @change="upload"
+        type="file"
+        name="upload_file"
+        id="input_file"
+        class="bl_uploader_uploadArea_input"
+        ref="input_file"
+      />
+      <input type="hidden" name="test" value="test" />
     </div>
+    <p class="bl_uploader_or">Or</p>
+    <button @click.prevent="selectImgFile" class="el_btn bl_uploader_uploadBtn">Choose a file</button>
   </div>
 </template>
 
@@ -44,17 +42,31 @@ export default {
             バリデーションに引っかかればinputを初期化する 
       */
       if (this.validate_uploadFile(file)) {
-        // axiosのPOST処理
+        //まず、emitで親のisUploadingをtrueにする
+        this.$emit("start-uploading")
 
+        // 以下axiosのPOST処理
         // まず、FormDataクラスを作って、選択されたファイルをセットする。
         let params = new FormData()
         params.append("file", file)
         // ファイルをPOSTする用のヘッダーを定義
         const headers = { "content-type": "multipart/form-data" }
         // POST実行
-        axios.post("/api/upload.php", params, { headers }).then((response) => {
-          console.log(response.data)
-        })
+        axios
+          .post("/api/upload.php", params, { headers })
+          .then((response) => {
+            // 親のHome.vueに返ってきた画像パスを渡す
+            this.$emit("get-uploaded-image-path", response.data)
+            setTimeout(() => {
+              this.$emit("stop-uploading")
+            }, 2000)
+          })
+          .catch((err) => {
+            console.log("error:", err)
+            setTimeout(() => {
+              this.$emit("stop-uploading")
+            }, 2000)
+          })
       } else {
         this.$refs.input_file.value = ""
       }
@@ -78,10 +90,6 @@ export default {
 </script>
 
 <style lang="scss">
-.bl_uploader {
-  background-color: #fff;
-  padding: 36px 26px;
-}
 .bl_uploader_ttl {
   text-align: center;
 }
