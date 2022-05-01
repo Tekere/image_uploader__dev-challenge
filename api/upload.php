@@ -2,7 +2,7 @@
 require_once('./functions.php');
 
 
-const STORAGE_PATH = '../storage/';
+const STORAGE_PATH = '../app/public/images/';
 
 // $_FILESはinputである以上必ず渡ってくるので、nameプロパティに文字列が入っているかどうかで判別
 try {
@@ -31,7 +31,10 @@ try {
       // );
       // echo $upload_path;
       // echo json_encode($result, JSON_UNESCAPED_UNICODE);
-      echo realpath($upload_path); //絶対パスに変換して返す
+
+      //画像ファイル名だけ返す
+      $filename = get_filename_from_fullpath($upload_path);
+      echo $filename;
     } else {
       throw new Exception('アップロードに失敗しました');
     }
