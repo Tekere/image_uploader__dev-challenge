@@ -5,7 +5,9 @@
       <span>Uploaded Successfully!</span>
     </h2>
     <div class="bl_complete_imageArea">
-      <img :src="'/images/' + uploadedImageName" alt="" class="bl_complete_imageArea_img" />
+      <figure class="bl_complete_imageArea_img_wrapper">
+        <img :src="'/images/' + uploadedImageName" alt="" class="bl_complete_imageArea_img" />
+      </figure>
       <div class="bl_complete_imageArea_pathArea">
         <span class="bl_complete_imageArea_path">
           {{ uploadedImagePath }}
@@ -35,7 +37,7 @@ export default {
       navigator.clipboard
         .writeText(this.uploadedImagePath)
         .then(() => {
-          window.alert("copy")
+          window.alert("copied")
         })
         .catch((e) => {
           console.log(e)
@@ -59,7 +61,6 @@ export default {
 }
 .bl_complete_imageArea {
   width: 100%;
-  border-radius: 12px;
   height: 70%;
 }
 .bl_complete_imageArea_pathArea {
@@ -71,14 +72,23 @@ export default {
   border-radius: 8px;
   padding: 2px 1px 2px 8px;
 }
+.bl_complete_imageArea_img_wrapper {
+  position: relative;
+  padding-top: 56.25%;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
 .bl_complete_imageArea_img {
   display: block;
-  max-width: 100%;
-  min-width: 50%;
-  max-height: 100%;
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 1.5rem;
 }
 .bl_complete_imageArea_path {
   overflow: hidden;
